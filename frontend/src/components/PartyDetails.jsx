@@ -7,6 +7,8 @@ import DeletePartyModal from "./DeletePartyModal";
 import Leaderboard from "./Leaderboard";
 import { useParams, useNavigate } from "react-router-dom";
 import supabase from "../supabase-client";
+import PartyEditModal from "./PartyEditModal";
+import ResolveBetModal from "./ResolveBetModal";
 
 const PartyDetails = () => {
   const { partyId } = useParams();
@@ -17,6 +19,7 @@ const PartyDetails = () => {
   const [propData, setPropData] = useState(null);
   const [showLeaveModal, setShowLeaveModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   // State for fetched data
   const [party, setParty] = useState(null);
@@ -288,6 +291,17 @@ const PartyDetails = () => {
     }
   };
 
+  const handleShowEditModal = () => {
+    setShowEditModal(true);
+  };
+
+  const handlePartyUpdate = (updatedParty) => {
+    console.log("PartyDetails: Received party update:", updatedParty);
+    setParty(updatedParty);
+    // Also refresh the party data from the server to ensure we have the latest data
+    fetchPartyData();
+  };
+
   if (loading) {
     return (
       <>
@@ -326,12 +340,20 @@ const PartyDetails = () => {
               </button>
             )}
             {isHost && (
-              <button
-                className="btn btn-outline btn-error"
-                onClick={handleShowDeleteModal}
-              >
-                Delete Party
-              </button>
+              <>
+                <button
+                  className="btn btn-outline btn-primary"
+                  onClick={handleShowEditModal}
+                >
+                  Edit Party
+                </button>
+                <button
+                  className="btn btn-outline btn-error"
+                  onClick={handleShowDeleteModal}
+                >
+                  Delete Party
+                </button>
+              </>
             )}
           </div>
         </div>
@@ -546,6 +568,14 @@ const PartyDetails = () => {
         partyName={party?.name || "Party"}
         partyId={partyId}
         onDeleted={handleDeleteParty}
+      />
+
+      <PartyEditModal
+        isOpen={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        party={party}
+        currentUser={{ id: userId }}
+        onPartyUpdate={handlePartyUpdate}
       />
     </>
   );

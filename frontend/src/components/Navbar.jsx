@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import CreatePartyModal from "./CreatePartyModal";
 import JoinPartyModal from "./JoinPartyModal";
+import ProfileModal from "./ProfileModal";
 import { useEffect, useState, useCallback } from "react";
 import supabase from "../supabase-client";
 
@@ -12,6 +13,7 @@ const Navbar = ({ onCreateProp, onBalanceRefresh }) => {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [userBalance, setUserBalance] = useState(0);
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   const fetchUserBalance = useCallback(async () => {
     try {
@@ -92,6 +94,10 @@ const Navbar = ({ onCreateProp, onBalanceRefresh }) => {
     } catch (err) {
       console.error("Unexpected error during logout:", err);
     }
+  };
+
+  const handleProfileUpdate = (updatedProfile) => {
+    setProfile(updatedProfile);
   };
 
   // PartyDetails navbar
@@ -223,7 +229,7 @@ const Navbar = ({ onCreateProp, onBalanceRefresh }) => {
                 </div>
               </li>
               <li className="border-t border-base-content/20">
-                <a>Profile</a>
+                <a onClick={() => setShowProfileModal(true)}>Profile</a>
               </li>
               <li>
                 <a>Settings</a>
@@ -352,7 +358,7 @@ const Navbar = ({ onCreateProp, onBalanceRefresh }) => {
               </div>
             </li>
             <li className="border-t border-base-content/20">
-              <a>Profile</a>
+              <a onClick={() => setShowProfileModal(true)}>Profile</a>
             </li>
             <li>
               <a>Settings</a>
@@ -365,6 +371,14 @@ const Navbar = ({ onCreateProp, onBalanceRefresh }) => {
       </div>
       <CreatePartyModal user={user} />
       <JoinPartyModal />
+
+      {/* Profile Modal */}
+      <ProfileModal
+        isOpen={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
+        profile={profile}
+        onProfileUpdate={handleProfileUpdate}
+      />
     </>
   );
 };
