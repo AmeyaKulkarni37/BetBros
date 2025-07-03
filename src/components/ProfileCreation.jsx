@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import supabase from "../supabase-client";
 import ImageCropper from "./ImageCropper";
 import { updateProfileImage } from "../utils/imageUpload";
 
 const ProfileCreation = () => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
@@ -90,7 +88,7 @@ const ProfileCreation = () => {
       }
 
       console.log("Profile created successfully");
-      navigate("/dashboard");
+      window.location.href = "/parties";
     } catch (err) {
       console.error("Error creating profile:", err);
       setError(err.message);

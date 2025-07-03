@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import supabase from "../supabase-client";
 
 const CreateProfile = () => {
@@ -10,7 +9,6 @@ const CreateProfile = () => {
   const [avatarPreview, setAvatarPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -113,7 +111,8 @@ const CreateProfile = () => {
       if (profileError) throw profileError;
 
       // Success! Navigate to parties
-      navigate("/parties");
+      // Use window.location.href to force a complete navigation and profile re-check
+      window.location.href = "/parties";
     } catch (err) {
       console.error("Error creating profile:", err);
       setError(err.message);

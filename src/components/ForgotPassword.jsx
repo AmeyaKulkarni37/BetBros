@@ -38,6 +38,10 @@ const ForgotPassword = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200">
       <div className="bg-base-300 p-8 rounded-xl shadow w-full max-w-md">
+        <div className="flex justify-center mb-6">
+          <img src="/logo.png" alt="BetBros Logo" className="h-12" />
+        </div>
+
         <h1 className="text-3xl font-bold text-center mb-6">Reset Password</h1>
 
         <p className="text-center text-sm mb-6 text-base-content/70">

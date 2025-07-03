@@ -84,51 +84,53 @@ const Prop = ({
         <div className="card-body pt-3 pb-5 px-5">
           <div className="flex justify-between items-top">
             <h2 className="card-title">{title}</h2>
-            <div className="dropdown dropdown-start">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle border-none avatar"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="#ffffff"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
+            {isHost && (
+              <div className="dropdown dropdown-start">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle border-none avatar"
                 >
-                  <circle cx="12" cy="12" r="1.5"></circle>
-                  <circle cx="12" cy="5" r="1.5"></circle>
-                  <circle cx="12" cy="19" r="1.5"></circle>
-                </svg>
-              </div>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu bg-base-300 rounded-box z-1 w-25 p-2 shadow-sm"
-              >
-                {isHost && !isResolved && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="#ffffff"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="feather feather-more-vertical"
+                  >
+                    <circle cx="12" cy="12" r="1.5"></circle>
+                    <circle cx="12" cy="5" r="1.5"></circle>
+                    <circle cx="12" cy="19" r="1.5"></circle>
+                  </svg>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu bg-base-300 rounded-box z-1 w-25 p-2 shadow-sm"
+                >
+                  {!isResolved && (
+                    <li>
+                      <button
+                        className="text-green-300"
+                        onClick={handleResolveClick}
+                      >
+                        Resolve
+                      </button>
+                    </li>
+                  )}
                   <li>
-                    <button
-                      className="text-green-300"
-                      onClick={handleResolveClick}
-                    >
-                      Resolve
-                    </button>
+                    <button onClick={handleEditClick}>Edit</button>
                   </li>
-                )}
-                <li>
-                  <button onClick={handleEditClick}>Edit</button>
-                </li>
-                <li>
-                  <button className="text-red-400">Delete</button>
-                </li>
-              </ul>
-            </div>
+                  <li>
+                    <button className="text-red-400">Delete</button>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
 
           <p className="py-2">{description}</p>
