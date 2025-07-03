@@ -268,12 +268,12 @@ const PartyDetails = () => {
 
   const handleLeaveParty = () => {
     // Redirect to dashboard after leaving party
-    navigate("/dashboard");
+    navigate("/parties");
   };
 
   const handleDeleteParty = () => {
     // Redirect to dashboard after deleting party
-    navigate("/dashboard");
+    navigate("/parties");
   };
 
   const handleShowLeaveModal = () => {

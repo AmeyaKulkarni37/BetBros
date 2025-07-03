@@ -240,6 +240,14 @@ const Navbar = ({ onCreateProp, onBalanceRefresh }) => {
             </ul>
           </div>
         </div>
+
+        {/* Profile Modal */}
+        <ProfileModal
+          isOpen={showProfileModal}
+          onClose={() => setShowProfileModal(false)}
+          profile={profile}
+          onProfileUpdate={handleProfileUpdate}
+        />
       </>
     );
   }

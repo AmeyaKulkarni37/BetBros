@@ -132,26 +132,30 @@ const Prop = ({
           </div>
 
           <p className="py-2">{description}</p>
-          <div className="card-actions justify-center">
+          <div className="card-actions justify-center gap-2">
             <button
-              className="btn btn-primary flex flex-col items-center w-1/3 p-7 border-none hover:bg-indigo-700"
+              className="btn btn-primary flex flex-col items-center flex-1 py-3 px-2 border-none hover:bg-indigo-700 min-h-[4rem]"
               onClick={() =>
                 openModal({ betName: title, choice: option1, odds: odds1 })
               }
               disabled={isResolved}
             >
-              <h3>{option1}</h3>
-              <p>{odds1}</p>
+              <h3 className="text-sm font-semibold text-center break-words leading-tight">
+                {option1}
+              </h3>
+              <p className="text-xs mt-1">{odds1}</p>
             </button>
             <button
-              className="btn btn-primary flex flex-col items-center w-1/3 p-7 border-none hover:bg-indigo-700"
+              className="btn btn-primary flex flex-col items-center flex-1 py-3 px-2 border-none hover:bg-indigo-700 min-h-[4rem]"
               onClick={() =>
                 openModal({ betName: title, choice: option2, odds: odds2 })
               }
               disabled={isResolved}
             >
-              <h3>{option2}</h3>
-              <p>{odds2}</p>
+              <h3 className="text-sm font-semibold text-center break-words leading-tight">
+                {option2}
+              </h3>
+              <p className="text-xs mt-1">{odds2}</p>
             </button>
           </div>
         </div>

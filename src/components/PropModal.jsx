@@ -13,12 +13,14 @@ const PropModal = ({ isOpen, onClose, mode, onSubmit, propData }) => {
     // Reset form fields when modal opens or changes mode
     if (isOpen) {
       if (mode === "edit" && propData) {
-        setPropTitle(propData.title || "");
-        setPropDesc(propData.description || "");
-        setOption1(propData.option1 || "");
-        setOption2(propData.option2 || "");
-        setOdds1(propData.odds1 || "");
-        setOdds2(propData.odds2 || "");
+        // Handle the nested structure - prop data is under bet_info
+        const betInfo = propData.bet_info || propData;
+        setPropTitle(betInfo.title || "");
+        setPropDesc(betInfo.description || "");
+        setOption1(betInfo.option1 || "");
+        setOption2(betInfo.option2 || "");
+        setOdds1(betInfo.odds1 || "");
+        setOdds2(betInfo.odds2 || "");
       } else {
         // For add mode, reset all fields
         setPropTitle("");

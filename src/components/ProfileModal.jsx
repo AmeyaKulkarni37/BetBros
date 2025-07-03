@@ -91,6 +91,9 @@ const ProfileModal = ({ isOpen, onClose, profile, onProfileUpdate }) => {
           console.error("Error uploading profile image:", uploadError);
           throw new Error("Failed to upload profile image");
         }
+      } else if (!previewUrl && profile?.avatar_url) {
+        // User removed the image
+        avatarUrl = null;
       }
 
       // Update profile data
@@ -98,8 +101,12 @@ const ProfileModal = ({ isOpen, onClose, profile, onProfileUpdate }) => {
         username: formData.username.trim(),
         full_name: formData.full_name.trim(),
         bio: formData.bio.trim(),
-        ...(avatarUrl !== profile?.avatar_url && { avatar_url: avatarUrl }),
       };
+
+      // Only include avatar_url if it has changed
+      if (avatarUrl !== profile?.avatar_url) {
+        updateData.avatar_url = avatarUrl;
+      }
 
       const { error: updateError } = await supabase
         .from("profiles")
